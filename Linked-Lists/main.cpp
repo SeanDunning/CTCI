@@ -80,7 +80,7 @@ int main()
     Node *n1 = new Node(27);
     Node *n2 = new Node(43);
     Node *n3 = new Node(47);
-    Node *n4 = new Node(27);
+    Node *n4 = new Node(17);
     Node *n5 = new Node(25);
     Node *n6 = new Node(12);
     ll.appendNodeEnd(n1);
