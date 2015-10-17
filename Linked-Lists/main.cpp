@@ -71,6 +71,15 @@ public:
     }
   cout << "Duplicates found: " << dupCount << endl;
   }
+
+  void deleteNode (Node *n) { //delete n with only a pointer to n
+    if (n->next) {
+      n->data = n->next->data;
+      n->next = n->next->next;
+    }
+
+  printList(); //print to see new list
+  }
 };
 int main()
 {
@@ -83,6 +92,8 @@ int main()
     Node *n4 = new Node(17);
     Node *n5 = new Node(25);
     Node *n6 = new Node(12);
+
+
     ll.appendNodeEnd(n1);
     ll.appendNodeEnd(n2);
     ll.appendNodeEnd(n3);
@@ -92,6 +103,7 @@ int main()
 
     ll.printList(); //print list
     ll.deleteDuplicate(); //find duplicates
+    ll.deleteNode(n4); //should delete 43
 
     delete(head);
     delete(n1);
