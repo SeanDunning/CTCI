@@ -9,6 +9,7 @@ public:
    int data;
 
     Node () {};
+	~Node() {delete obj};
 
     Node(int d) {
     data = d;
