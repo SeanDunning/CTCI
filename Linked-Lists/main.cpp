@@ -8,9 +8,6 @@ public:
    Node *next;
    int data;
 
-    Node () {};
-	~Node() {delete obj};
-
     Node(int d) {
     data = d;
     next = NULL;
