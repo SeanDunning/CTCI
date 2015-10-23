@@ -110,13 +110,5 @@ int main()
     ll.deleteDuplicate(); //find duplicates
     ll.deleteNode(n4); //should delete 43
 
-    delete(head);
-    delete(n1);
-    delete(n2);
-    delete(n3);
-    delete(n4);
-    delete(n5);
-    delete(n6);
-
     return 0;
 }
