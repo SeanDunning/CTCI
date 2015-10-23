@@ -24,7 +24,14 @@ public:
 
   LinkedList() { head = NULL;}
   LinkedList(Node *n) {head = n;}
-
+  ~LinkedList() {
+    Node* ptr = head;
+    while(head) {
+      ptr = head->next;
+      delete head;
+      head = ptr;
+    }
+  }
   void appendNodeEnd(Node *node) {
 
     if (head == NULL){ //set head if doesn't exist
