@@ -1,0 +1,56 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+class QueueFromStacks {
+
+  stack<int> tempStack;
+  stack<int> finalStack;
+
+public:
+
+/* Push function pops everything in finalStack, moves it to tempStack. *
+ * Then inserts data into finalStack. Everything in tempStack is moved *
+ * back to finalStack.                                                 */
+  void push(int data) {
+
+    while(!finalStack.empty()){
+      tempStack.push(finalStack.top());
+      finalStack.pop();
+    } //pop everything from finalStack into tempStack
+
+    finalStack.push(data); //push data to finalStack
+
+    while(!tempStack.empty()){
+      finalStack.push(tempStack.top());
+      tempStack.pop();
+    } //pop everything from tempStack back to finalStack
+
+    if (tempStack.empty() && finalStack.empty()) //base case, only 1 element
+      finalStack.push(data);
+  } //push
+
+  void printQueue() {
+    while(!finalStack.empty()){
+      cout << finalStack.top() << endl;
+      finalStack.pop();
+    }
+  } //printQueue
+
+
+};
+
+/* Input : 0 - 99                     */
+/* Output should be : 0 - 99 in order */
+
+int main()
+{
+  QueueFromStacks queueOne;
+  for (int i = 0; i < 100; i++) {
+    queueOne.push(i);
+  }
+
+  queueOne.printQueue(); //print the Queue
+
+  return 0;
+}
