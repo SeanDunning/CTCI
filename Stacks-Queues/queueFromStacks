@@ -9,46 +9,92 @@ class QueueFromStacks {
 
 public:
 
-/* Push function pops everything in finalStack, moves it to tempStack. *
- * Then inserts data into finalStack. Everything in tempStack is moved *
- * back to finalStack.                                                 */
-  void push(int data) {
+  void stackTransferToTemp() {
 
     while(!finalStack.empty()){
       tempStack.push(finalStack.top());
       finalStack.pop();
-    } //pop everything from finalStack into tempStack
-
-    finalStack.push(data); //push data to finalStack
+    } //pop everything from finalStack to tempStack
+  }
+ void stackTransferToFinal() {
 
     while(!tempStack.empty()){
       finalStack.push(tempStack.top());
       tempStack.pop();
-    } //pop everything from tempStack back to finalStack
+    } //pop everything from tempStack to finalStack
+  }
+/* Push function pops everything in finalStack, moves it to tempStack. *
+ * Then inserts data into finalStack. Everything in tempStack is moved *
+ * back to finalStack.                                                 */
+void push(int data) {
+
+    stackTransferToTemp();
+
+    finalStack.push(data); //push data to finalStack
+
+    stackTransferToFinal();
 
     if (tempStack.empty() && finalStack.empty()) //base case, only 1 element
       finalStack.push(data);
   } //push
 
-  void printQueue() {
+/* Check if data is < finalStack.top. If so, move top to tempStack.    *
+ * Repeat until data is > top and insert. Move everything in           *
+ * tempStack back to finalStack.                                       */
+void pushInOrder(int data) {
+
+    while(!finalStack.empty() && finalStack.top() > data) {
+      tempStack.push(finalStack.top());
+      finalStack.pop();
+    }
+
+    finalStack.push(data);
+
+    stackTransferToFinal();
+
+    if(tempStack.empty() && finalStack.empty())
+      finalStack.push(data);
+  } //pushInOrder
+
+void printQueue() {
     while(!finalStack.empty()){
       cout << finalStack.top() << endl;
       finalStack.pop();
     }
+    cout << endl; //formatting
   } //printQueue
 
+void clearStacks() {
+    while(!tempStack.empty()){
+      tempStack.pop();
+    }
+    while(!finalStack.empty()){
+      finalStack.pop();
+    }
+  } //clearStacks
 
 };
+/* Regular push :                                   */
+/* Input : 0 - 99                                   */
+/* Output should be : 0 - 99 for regular push       */
 
-/* Input : 0 - 99                     */
-/* Output should be : 0 - 99 in order */
+/* Regular push :                                   */
+/* Input : 0 - 99                                   */
+/* Output should be : 99 - 0 for in order ascending */
 
 int main()
 {
   QueueFromStacks queueOne;
   for (int i = 0; i < 100; i++) {
     queueOne.push(i);
-  }
+  } //regular push
+
+  queueOne.printQueue(); //print the Queue
+  queueOne.clearStacks(); //empty the stacks
+
+  for (int i = 0; i < 100; i++) {
+    queueOne.pushInOrder(i);
+  }//pushInOrder (ascending)
 
   queueOne.printQueue(); //print the Queue
 
