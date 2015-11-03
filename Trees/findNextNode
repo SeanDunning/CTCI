@@ -1,0 +1,19 @@
+/*Find next node for an inorder binary tree traversal */
+
+Node * nextNodeAlg(Node *root) {
+
+  if(root) {
+    if (root->left && root->left.visited != true)
+       return root->left; 
+    else if (root->visited != true)
+      return root; 
+    else if(root->right) 
+        return root->right; 
+    else {  //current node, and both children visited, so find next unvisited parent
+        while(root->parent->visited == true) {
+            root = root->parent;
+        }
+        return root->parent;
+    }
+  return root; // root is NULL
+}
