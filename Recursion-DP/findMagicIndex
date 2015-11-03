@@ -1,0 +1,16 @@
+findMagicIndex(int *arr, int low, int high) {
+    if (low > high || high > arr.length() - 1 || low < 0)
+        return -1;
+        
+    int median = (low + high) / 2;
+    
+    if (arr[median] == median)
+        return median; //found magic index
+    else if (arr[median] > median) {
+        //continue dividing left half
+        findMagicIndex(arr, low, median - 1);
+    } else if (arr[median] < median) {
+        //continue dividing right half
+        findMagicIndex(arr, median + 1, high);
+    } 
+}
